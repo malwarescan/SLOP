@@ -25,21 +25,21 @@ const tiers = [
 export default function Pricing() {
   return (
     <MarketingShell>
-      <section className="mx-auto max-w-[1240px] px-6 py-16">
+      <section className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
         <div className="space-y-4">
           <p className="text-xs uppercase tracking-[0.28em] text-steel">Pricing</p>
-          <h1 className="text-3xl font-semibold uppercase tracking-[0.12em]">
+          <h1 className="text-2xl font-semibold uppercase tracking-[0.1em] sm:text-3xl sm:tracking-[0.12em]">
             Signal-Grade Plans
           </h1>
           <p className="text-sm text-steel">
             All tiers enforce fact-grounding, provenance, and compliance rules.
           </p>
         </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {tiers.map((tier) => (
             <div
               key={tier.name}
-              className="rounded-card border border-white/10 bg-charcoal/80 p-6 shadow-subtleBorder"
+              className="rounded-card border border-white/10 bg-charcoal/80 p-5 shadow-subtleBorder sm:p-6"
             >
               <p className="text-xs uppercase tracking-[0.22em] text-cyan">
                 {tier.name}

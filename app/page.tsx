@@ -19,12 +19,10 @@ const pillars = [
 
 export default function Home() {
   return (
-    <MarketingShell headerBlur={false}>
-      <div className="-mt-20">
-        <HeroIntro />
-      </div>
+    <MarketingShell mainOffset={false} headerBlur={false}>
+      <HeroIntro />
 
-      <section className="mx-auto grid max-w-[1240px] gap-6 px-6 py-16 md:grid-cols-3">
+      <section className="mx-auto grid max-w-[1240px] gap-5 px-4 py-12 sm:grid-cols-2 sm:gap-6 sm:px-6 sm:py-16 md:grid-cols-3">
         {pillars.map((pillar) => (
           <div
             key={pillar.title}
@@ -39,10 +37,10 @@ export default function Home() {
       </section>
 
       <section className="bg-obsidian-sheen">
-        <div className="mx-auto grid max-w-[1240px] gap-10 px-6 py-16 md:grid-cols-2">
+        <div className="mx-auto grid max-w-[1240px] gap-8 px-4 py-12 sm:gap-10 sm:px-6 sm:py-16 md:grid-cols-2">
           <div className="space-y-4">
             <p className="text-xs uppercase tracking-[0.28em] text-steel">Input</p>
-            <h2 className="text-3xl font-semibold uppercase tracking-[0.12em]">
+            <h2 className="text-2xl font-semibold uppercase tracking-[0.1em] sm:text-3xl sm:tracking-[0.12em]">
               Logic Packages In
             </h2>
             <p className="text-sm text-steel">
@@ -63,7 +61,7 @@ export default function Home() {
           </div>
           <div className="space-y-4">
             <p className="text-xs uppercase tracking-[0.28em] text-steel">Output</p>
-            <h2 className="text-3xl font-semibold uppercase tracking-[0.12em]">
+            <h2 className="text-2xl font-semibold uppercase tracking-[0.1em] sm:text-3xl sm:tracking-[0.12em]">
               Narrative Packs Out
             </h2>
             <p className="text-sm text-steel">
@@ -91,9 +89,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-[1240px] flex-col gap-6 px-6 py-16 md:flex-row md:items-center md:justify-between">
+      <section className="mx-auto flex max-w-[1240px] flex-col gap-4 px-4 py-12 sm:gap-6 sm:px-6 sm:py-16 md:flex-row md:items-center md:justify-between">
         <div>
-          <h3 className="text-2xl font-semibold uppercase tracking-[0.12em]">
+          <h3 className="text-xl font-semibold uppercase tracking-[0.1em] sm:text-2xl sm:tracking-[0.12em]">
             Operator Console Ready
           </h3>
           <p className="mt-2 text-sm text-steel">

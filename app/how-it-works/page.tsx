@@ -19,10 +19,10 @@ const steps = [
 export default function HowItWorks() {
   return (
     <MarketingShell>
-      <section className="mx-auto grid max-w-[1240px] gap-10 px-6 py-16 md:grid-cols-[0.9fr_1.1fr]">
+      <section className="mx-auto grid max-w-[1240px] gap-8 px-4 py-12 sm:gap-10 sm:px-6 sm:py-16 md:grid-cols-[0.9fr_1.1fr]">
         <div className="space-y-4">
           <p className="text-xs uppercase tracking-[0.28em] text-steel">How It Works</p>
-          <h1 className="text-3xl font-semibold uppercase tracking-[0.12em]">
+          <h1 className="text-2xl font-semibold uppercase tracking-[0.1em] sm:text-3xl sm:tracking-[0.12em]">
             From Signal to Narrative
           </h1>
           <p className="text-sm text-steel">
@@ -35,7 +35,7 @@ export default function HowItWorks() {
           {steps.map((step, index) => (
             <div
               key={step.title}
-              className="rounded-card border border-white/10 bg-charcoal/80 p-5 shadow-subtleBorder"
+              className="rounded-card border border-white/10 bg-charcoal/80 p-4 shadow-subtleBorder sm:p-5"
             >
               <p className="text-xs uppercase tracking-[0.22em] text-cyan">
                 Step {index + 1}

@@ -8,12 +8,12 @@ export default function Studio() {
   return (
     <div className="min-h-screen bg-obsidian text-slate-100">
       <header className="border-b border-white/10 bg-obsidian/90">
-        <div className="mx-auto flex max-w-[1320px] items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-6">
-            <span className="text-xs uppercase tracking-[0.3em] text-cyan">
+        <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6">
+            <span className="whitespace-nowrap text-[0.7rem] uppercase tracking-[0.25em] text-cyan sm:text-xs sm:tracking-[0.3em]">
               SLOP.TECHNOLOGY
             </span>
-            <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-steel">
+            <div className="flex flex-wrap items-center gap-2 text-[0.6rem] uppercase tracking-[0.22em] text-steel sm:text-[0.65rem] sm:tracking-[0.25em]">
               <span className="rounded-full border border-cyan/40 px-3 py-1 text-cyan">
                 Logic
               </span>
@@ -22,14 +22,14 @@ export default function Studio() {
               </span>
             </div>
           </div>
-          <div className="text-xs uppercase tracking-[0.25em] text-steel">
+          <div className="order-last w-full text-[0.65rem] uppercase tracking-[0.22em] text-steel sm:order-none sm:w-auto sm:text-xs sm:tracking-[0.25em]">
             Entity: Oracle Garden
           </div>
-          <ChromeButton label="New Job" />
+          <ChromeButton label="New Job" className="shrink-0" />
         </div>
       </header>
 
-      <main className="mx-auto grid max-w-[1320px] gap-6 px-6 py-10 md:grid-cols-[1fr_1fr_1fr]">
+      <main className="mx-auto grid max-w-[1320px] gap-6 px-4 py-8 sm:px-6 sm:py-10 md:grid-cols-[1fr_1fr_1fr]">
         <div className="space-y-6">
           <TruthPanel />
           <div className="rounded-card border border-white/10 bg-charcoal/80 p-5 shadow-subtleBorder">

@@ -40,7 +40,7 @@ export default function HeroIntro() {
   }, [ended]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-obsidian">
+    <div className="relative min-h-screen min-h-[100svh] w-full overflow-hidden bg-obsidian">
       {!videoHidden && (
         <>
           <video
@@ -68,7 +68,7 @@ export default function HeroIntro() {
           </video>
 
           {!ended && (
-            <div className="absolute bottom-6 right-6 z-10">
+            <div className="absolute bottom-4 right-4 z-10 sm:bottom-6 sm:right-6">
               <button
                 type="button"
                 onClick={() => void toggleSound()}

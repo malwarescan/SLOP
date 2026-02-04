@@ -10,18 +10,18 @@ const metrics = [
 export default function Proof() {
   return (
     <MarketingShell>
-      <section className="mx-auto max-w-[1240px] px-6 py-16">
-        <div className="grid gap-10 md:grid-cols-[1.05fr_0.95fr]">
+      <section className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.05fr_0.95fr]">
           <div className="space-y-4">
             <p className="text-xs uppercase tracking-[0.28em] text-steel">Proof</p>
-            <h1 className="text-3xl font-semibold uppercase tracking-[0.12em]">
+            <h1 className="text-2xl font-semibold uppercase tracking-[0.1em] sm:text-3xl sm:tracking-[0.12em]">
               Provenance You Can Audit
             </h1>
             <p className="text-sm text-steel">
               Every output carries logic and prompt hashes for instant traceability.
               Compliance policies are enforced at generation time.
             </p>
-            <div className="grid gap-3 md:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               {metrics.map((metric) => (
                 <div
                   key={metric.label}
@@ -39,6 +39,7 @@ export default function Proof() {
             <video
               className="w-full rounded-[12px]"
               src="/sloptech-720p.mp4"
+              playsInline
               controls
               preload="metadata"
             />
