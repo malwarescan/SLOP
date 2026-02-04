@@ -7,65 +7,31 @@ export default function HeroIntro() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [ended, setEnded] = useState(false);
   const [videoHidden, setVideoHidden] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
 
-  useEffect(() => {
+  const toggleSound = async () => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Autoplay-with-sound is blocked by most browsers until a user gesture.
-    // We attempt sound-on autoplay first; if blocked, we start muted autoplay so
-    // the intro still runs, then unmute automatically on the first gesture.
-    const start = async () => {
+    if (video.muted) {
       try {
+        video.muted = false;
+        video.volume = 1;
+        await video.play();
+        setSoundOn(!video.muted);
+      } catch {
+        // Autoplay-with-sound can still be blocked; keep muted.
         video.muted = true;
         video.volume = 0;
-        await video.play();
-      } catch {
-        // Ignore; we'll retry on gesture if needed.
+        setSoundOn(false);
       }
+      return;
+    }
 
-      try {
-        video.muted = false;
-        video.volume = 1;
-        await video.play();
-      } catch {
-        // Ignore; we'll unmute on gesture when allowed.
-      }
-    };
-
-    void start();
-
-    const tryUnmute = async () => {
-      if (video.ended) return;
-      try {
-        await video.play();
-      } catch {
-        // Ignore.
-      }
-      try {
-        video.muted = false;
-        video.volume = 1;
-        await video.play();
-        if (!video.muted) {
-          window.removeEventListener("pointerdown", tryUnmute);
-          window.removeEventListener("keydown", tryUnmute);
-          window.removeEventListener("scroll", tryUnmute);
-        }
-      } catch {
-        // Keep listeners; another gesture may succeed.
-      }
-    };
-
-    window.addEventListener("pointerdown", tryUnmute, { passive: true });
-    window.addEventListener("keydown", tryUnmute);
-    window.addEventListener("scroll", tryUnmute, { passive: true });
-
-    return () => {
-      window.removeEventListener("pointerdown", tryUnmute);
-      window.removeEventListener("keydown", tryUnmute);
-      window.removeEventListener("scroll", tryUnmute);
-    };
-  }, []);
+    video.muted = true;
+    video.volume = 0;
+    setSoundOn(false);
+  };
 
   useEffect(() => {
     if (!ended) return;
@@ -88,7 +54,10 @@ export default function HeroIntro() {
             muted
             controls={false}
             poster="/sloptech-poster.jpg"
-            onEnded={() => setEnded(true)}
+            onEnded={() => {
+              setEnded(true);
+              setSoundOn(false);
+            }}
           >
             <source
               src="/sloptech-540p.mp4"
@@ -97,6 +66,20 @@ export default function HeroIntro() {
             />
             <source src="/sloptech-720p.mp4" type="video/mp4" />
           </video>
+
+          {!ended && (
+            <div className="absolute bottom-6 right-6 z-10">
+              <button
+                type="button"
+                onClick={() => void toggleSound()}
+                className="rounded-full border border-white/15 bg-obsidian/80 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-steel transition hover:text-cyan"
+                aria-pressed={soundOn}
+                aria-label={soundOn ? "Mute intro video" : "Unmute intro video"}
+              >
+                {soundOn ? "Sound On" : "Sound Off"}
+              </button>
+            </div>
+          )}
         </>
       )}
 

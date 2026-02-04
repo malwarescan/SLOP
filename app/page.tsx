@@ -19,7 +19,7 @@ const pillars = [
 
 export default function Home() {
   return (
-    <MarketingShell>
+    <MarketingShell headerBlur={false}>
       <div className="-mt-20">
         <HeroIntro />
       </div>

@@ -9,16 +9,20 @@ const navLinks = [
 
 export default function MarketingShell({
   children,
-  mainOffset = true
+  mainOffset = true,
+  headerBlur = true
 }: {
   children: React.ReactNode;
   mainOffset?: boolean;
+  headerBlur?: boolean;
 }) {
   return (
     <div className="min-h-screen bg-obsidian text-slate-100">
       <header
         id="site-header"
-        className="fixed inset-x-0 top-0 z-20 border-b border-white/10 bg-obsidian/90 backdrop-blur"
+        className={`fixed inset-x-0 top-0 z-20 border-b border-white/10 ${
+          headerBlur ? "bg-obsidian/90 backdrop-blur" : "bg-obsidian/95"
+        }`}
       >
         <div className="mx-auto flex max-w-[1240px] items-center justify-between px-6 py-4">
           <Link href="/" className="text-sm uppercase tracking-[0.4em] text-cyan">
