@@ -97,73 +97,90 @@ export default function HeroIntro() {
           aria-hidden
         />
 
-        <div className="relative mx-auto flex h-full w-full max-w-[1240px] flex-col items-center px-4 pb-14 pt-24 sm:px-6 sm:pb-16 sm:pt-28">
-          <div className="w-full max-w-[980px] text-center">
-            <p className="text-[0.7rem] uppercase tracking-[0.35em] text-steel">
-              Distribution with proof
-            </p>
-            <h1 className="mt-5 text-3xl font-semibold uppercase tracking-[0.1em] sm:text-5xl sm:tracking-[0.12em]">
-              Turn structured truth into distributed media.
-            </h1>
-            <p className="mt-4 text-sm text-steel sm:text-base">
-              Slop takes verified inputs and outputs platform-native media kits with proof,
-              scheduling, and performance telemetry.
-            </p>
-            <p className="mt-3 text-[0.7rem] uppercase tracking-[0.28em] text-steel">
-              Built for CEOs: provenance, controls, measurable reach.
-            </p>
+        <div className="relative mx-auto grid h-full w-full max-w-[1240px] grid-cols-12 items-start px-4 pb-14 pt-24 sm:px-6 sm:pb-16 sm:pt-28">
+          <div className="col-span-12 lg:col-span-10 lg:col-start-2">
+            <section className="rounded-[24px] border border-white/10 bg-black/55 p-7 shadow-[0_22px_70px_rgba(0,0,0,0.6)] backdrop-blur-[16px] sm:p-8 lg:rounded-[28px] lg:p-12 xl:p-14">
+              <div className="text-left">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-200/90">
+                  Distribution with proof
+                </p>
+                <div className="mt-3 h-px w-6 bg-white/15" aria-hidden />
 
-            <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="/studio"
-                className="inline-flex items-center justify-center rounded-button border border-cyan/40 bg-obsidian/70 px-6 py-3 text-[0.7rem] uppercase tracking-[0.25em] text-cyan shadow-[0_0_24px_rgba(89,240,255,0.14)] transition hover:bg-cyan/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
-              >
-                Open Operator Console
-              </Link>
-              <Link
-                href="/proof"
-                className="inline-flex items-center justify-center rounded-button border border-white/10 bg-obsidian/55 px-6 py-3 text-[0.7rem] uppercase tracking-[0.25em] text-steel transition hover:bg-white/5 hover:text-cyan focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/40"
-              >
-                See Proof
-              </Link>
-            </div>
-          </div>
+                <h1 className="mt-4 text-[2.4rem] font-semibold uppercase leading-[1.02] tracking-[0.02em] text-slate-100 drop-shadow-[0_2px_0_rgba(0,0,0,0.35)] sm:text-[3rem] md:text-[3.5rem] lg:text-[4.25rem]">
+                  <span className="block">Turn structured truth</span>
+                  <span className="block">into distributed media.</span>
+                </h1>
 
-          <div className="mt-10 w-full max-w-[1120px]">
-            <DistroDiagram className="h-auto w-full" />
-          </div>
+                <p className="mt-5 max-w-[66ch] text-[0.95rem] leading-relaxed text-slate-100/90 sm:text-[1.05rem]">
+                  Generate platform-native media kits from verified sources, with proofs,
+                  scheduling, and performance telemetry.
+                </p>
 
-          <div className="mt-8 w-full max-w-[1120px]">
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {[
-                {
-                  title: "30s Short (9:16)",
-                  desc: "Hook, captions, b-roll cut, OG images, proof packet."
-                },
-                { title: "X Thread Kit", desc: "8 posts, OG image set, UTMs, receipts." },
-                {
-                  title: "LinkedIn Carousel",
-                  desc: "7 slides, title copy, caption variants, proof."
-                },
-                { title: "Newsletter Issue", desc: "Subject lines, body, sources, links." },
-                { title: "Press Kit", desc: "Boilerplate, quotes, claims list, citations." }
-              ].map((artifact) => (
-                <div
-                  key={artifact.title}
-                  className="min-w-[220px] flex-1 rounded-card border border-white/10 bg-charcoal/70 p-4 shadow-subtleBorder"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-[0.7rem] uppercase tracking-[0.25em] text-cyan">
-                      {artifact.title}
-                    </p>
-                    <span className="shrink-0 rounded-full border border-cyan/30 bg-obsidian/60 px-2.5 py-1 text-[0.55rem] uppercase tracking-[0.25em] text-cyan">
-                      Proof
+                <div className="mt-6 flex flex-wrap gap-2.5">
+                  {["Provenance", "Controls", "Audit trail", "Measurable reach"].map((chip) => (
+                    <span
+                      key={chip}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-slate-100/85"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-cyan/80" aria-hidden />
+                      {chip}
                     </span>
-                  </div>
-                  <p className="mt-3 text-xs text-steel">{artifact.desc}</p>
+                  ))}
                 </div>
-              ))}
-            </div>
+
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <Link
+                    href="/studio"
+                    className="inline-flex h-12 w-full items-center justify-center rounded-button border border-cyan/50 bg-cyan/10 px-6 text-[0.7rem] uppercase tracking-[0.22em] text-cyan shadow-[0_18px_50px_rgba(0,0,0,0.45)] transition-shadow hover:shadow-[0_0_0_1px_rgba(89,240,255,0.18),0_0_30px_rgba(89,240,255,0.16),0_18px_50px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 sm:w-auto"
+                  >
+                    Open Operator Console
+                  </Link>
+                  <Link
+                    href="/proof"
+                    className="inline-flex h-12 w-full items-center justify-center rounded-button border border-white/10 bg-black/20 px-6 text-[0.7rem] uppercase tracking-[0.22em] text-slate-200/80 transition hover:bg-white/5 hover:text-cyan focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/40 sm:w-auto"
+                  >
+                    See Proof
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-10 rounded-card border border-white/10 bg-black/20 p-4 sm:p-5">
+                <DistroDiagram className="h-auto w-full" />
+              </div>
+
+              <div className="mt-8">
+                <div className="flex gap-3 overflow-x-auto pb-2">
+                  {[
+                    {
+                      title: "30s Short (9:16)",
+                      desc: "Hook, captions, b-roll cut, OG images, proof packet."
+                    },
+                    { title: "X Thread Kit", desc: "8 posts, OG image set, UTMs, receipts." },
+                    {
+                      title: "LinkedIn Carousel",
+                      desc: "7 slides, title copy, caption variants, proof."
+                    },
+                    { title: "Newsletter Issue", desc: "Subject lines, body, sources, links." },
+                    { title: "Press Kit", desc: "Boilerplate, quotes, claims list, citations." }
+                  ].map((artifact) => (
+                    <div
+                      key={artifact.title}
+                      className="min-w-[220px] flex-1 rounded-card border border-white/10 bg-black/20 p-4"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <p className="text-[0.78rem] font-medium uppercase tracking-[0.18em] text-cyan">
+                          {artifact.title}
+                        </p>
+                        <span className="shrink-0 rounded-full border border-cyan/30 bg-black/20 px-2.5 py-1 text-[0.55rem] uppercase tracking-[0.22em] text-cyan">
+                          Proof
+                        </span>
+                      </div>
+                      <p className="mt-3 text-xs text-slate-200/75">{artifact.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
