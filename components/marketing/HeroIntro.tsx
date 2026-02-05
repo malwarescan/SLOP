@@ -146,7 +146,7 @@ export default function HeroIntro() {
                   {/* CTAs */}
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
                     <Link
-                      href="/studio"
+                      href="/operator"
                       className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 bg-white/10 px-6 text-sm font-medium text-white transition hover:bg-white/14"
                     >
                       Open Operator Console

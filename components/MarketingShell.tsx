@@ -70,7 +70,7 @@ export default function MarketingShell({
             </details>
 
             <Link
-              href="/studio"
+              href="/operator"
               className="whitespace-nowrap rounded-full border border-cyan/40 px-3 py-2 text-[0.65rem] uppercase tracking-[0.22em] text-cyan transition hover:bg-cyan/5"
             >
               <span className="hidden sm:inline">Operator Console</span>
