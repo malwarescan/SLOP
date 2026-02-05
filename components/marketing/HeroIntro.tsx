@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import DistroDiagram from "./DistroDiagram";
 
 export default function HeroIntro() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -89,22 +89,15 @@ export default function HeroIntro() {
         }`}
         aria-hidden={!ended}
       >
-        <div className="absolute inset-0 hero-checkerboard" aria-hidden />
+        <div className="absolute inset-0 bg-obsidian" aria-hidden />
+        <div className="absolute inset-0 bg-oracle-grid opacity-80" aria-hidden />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-obsidian/15 via-obsidian/55 to-obsidian"
+          aria-hidden
+        />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/35 via-obsidian/55 to-obsidian" />
-
-        <div className="relative grid h-full w-full place-items-center">
-          <div className="pointer-events-none absolute -inset-16 rounded-full bg-cyan/5 blur-3xl" />
-
-          <div className="relative h-[min(88vw,88vh)] w-[min(88vw,88vh)]">
-            <Image
-              src="/slop-logo.png"
-              alt="SLOP.TECHNOLOGY"
-              fill
-              priority
-              className="animate-float object-contain drop-shadow-[0_0_70px_rgba(89,240,255,0.12)]"
-            />
-          </div>
+        <div className="relative mx-auto flex h-full w-full max-w-[1240px] items-center justify-center px-4 pb-16 pt-24 sm:px-6 sm:pt-28">
+          <DistroDiagram className="h-auto w-full max-w-[980px]" />
         </div>
       </div>
     </div>

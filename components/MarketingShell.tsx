@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
@@ -20,28 +21,39 @@ export default function MarketingShell({
     <div className="min-h-screen bg-obsidian text-slate-100">
       <header
         id="site-header"
-        className={`fixed inset-x-0 top-0 z-20 border-b border-white/10 ${
-          headerBlur ? "bg-obsidian/90 md:backdrop-blur" : "bg-obsidian/95"
-        }`}
+        className="fixed inset-x-0 top-0 z-20"
       >
         <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
-          <Link
-            href="/"
-            className="min-w-0 truncate text-[0.7rem] uppercase tracking-[0.3em] text-cyan sm:text-sm sm:tracking-[0.4em]"
-          >
-            SLOP.TECHNOLOGY
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/slop-logo.png"
+              alt="SLOP"
+              width={160}
+              height={64}
+              priority
+              className="h-8 w-auto select-none sm:h-10"
+            />
           </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <nav className="hidden items-center gap-6 text-xs uppercase tracking-[0.25em] text-steel md:flex">
+
+          <div
+            className={`flex items-center gap-1 rounded-full border border-white/10 px-2 py-1.5 shadow-[0_0_0_1px_rgba(140,160,180,0.08),0_22px_60px_rgba(0,0,0,0.55)] ${
+              headerBlur ? "bg-obsidian/70 md:backdrop-blur" : "bg-obsidian/85"
+            }`}
+          >
+            <nav className="hidden items-center gap-1 md:flex">
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="hover:text-cyan">
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-full px-3 py-2 text-xs uppercase tracking-[0.25em] text-steel transition hover:bg-white/5 hover:text-cyan"
+                >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
             <details className="relative md:hidden">
-              <summary className="list-none rounded-full border border-white/10 bg-obsidian/60 px-3 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-steel [&::-webkit-details-marker]:hidden">
+              <summary className="list-none rounded-full px-3 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-steel transition hover:bg-white/5 hover:text-cyan [&::-webkit-details-marker]:hidden">
                 Menu
               </summary>
               <div className="absolute right-0 mt-3 w-60 rounded-card border border-white/10 bg-obsidian/95 p-2 shadow-lg">
@@ -49,7 +61,7 @@ export default function MarketingShell({
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="block rounded-lg px-3 py-3 text-xs uppercase tracking-[0.25em] text-steel hover:bg-white/5 hover:text-cyan"
+                    className="block rounded-lg px-3 py-3 text-xs uppercase tracking-[0.25em] text-steel transition hover:bg-white/5 hover:text-cyan"
                   >
                     {link.label}
                   </Link>
@@ -59,9 +71,10 @@ export default function MarketingShell({
 
             <Link
               href="/studio"
-              className="whitespace-nowrap rounded-full border border-cyan/40 px-3 py-2 text-[0.6rem] uppercase tracking-[0.25em] text-cyan sm:px-4 sm:text-[0.65rem]"
+              className="whitespace-nowrap rounded-full border border-cyan/40 px-3 py-2 text-[0.65rem] uppercase tracking-[0.22em] text-cyan transition hover:bg-cyan/5"
             >
-              Operator Console
+              <span className="hidden sm:inline">Operator Console</span>
+              <span className="sm:hidden">Console</span>
             </Link>
           </div>
         </div>
