@@ -90,65 +90,71 @@ export default function HeroIntro() {
         }`}
         aria-hidden={!ended}
       >
-        <div className="absolute inset-0 bg-obsidian" aria-hidden />
-        <div className="absolute inset-0 bg-oracle-grid opacity-80" aria-hidden />
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-obsidian/15 via-obsidian/55 to-obsidian"
-          aria-hidden
-        />
+        <section className="relative h-full w-full overflow-hidden">
+          <div className="absolute inset-0 z-0 pointer-events-none bg-obsidian" aria-hidden />
+          <div className="absolute inset-0 z-0 pointer-events-none bg-oracle-grid opacity-80" aria-hidden />
+          <div className="absolute inset-0 z-0 pointer-events-none hero-checkerboard opacity-25" aria-hidden />
+          <div
+            className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-obsidian/15 via-obsidian/55 to-obsidian"
+            aria-hidden
+          />
 
-        <div className="relative mx-auto grid h-full w-full max-w-[1240px] grid-cols-12 items-start px-4 pb-14 pt-24 sm:px-6 sm:pb-16 sm:pt-28">
-          <div className="col-span-12 lg:col-span-10 lg:col-start-2">
-            <section className="rounded-[24px] border border-white/10 bg-black/55 p-7 shadow-[0_22px_70px_rgba(0,0,0,0.6)] backdrop-blur-[16px] sm:p-8 lg:rounded-[28px] lg:p-12 xl:p-14">
-              <div className="text-left">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-200/90">
+          <div className="relative z-10 mx-auto grid max-w-[1120px] grid-cols-12 px-6 pb-10 pt-16">
+            <div className="hero-unit col-span-12 px-6 py-10 sm:px-10 sm:py-12">
+              <div className="relative z-10">
+                {/* Eyebrow */}
+                <div className="text-xs uppercase tracking-[0.18em] text-white/85">
                   Distribution with proof
-                </p>
-                <div className="mt-3 h-px w-6 bg-white/15" aria-hidden />
+                  <div className="hero-eyebrow-rule" />
+                </div>
 
-                <h1 className="mt-4 text-[2.4rem] font-semibold uppercase leading-[1.02] tracking-[0.02em] text-slate-100 drop-shadow-[0_2px_0_rgba(0,0,0,0.35)] sm:text-[3rem] md:text-[3.5rem] lg:text-[4.25rem]">
-                  <span className="block">Turn structured truth</span>
-                  <span className="block">into distributed media.</span>
+                {/* Headline */}
+                <h1 className="hero-headline-tight mt-4 text-4xl font-semibold leading-[0.98] text-white sm:text-5xl lg:text-6xl">
+                  TURN STRUCTURED TRUTH INTO
+                  <br className="hidden sm:block" />
+                  DISTRIBUTED MEDIA.
                 </h1>
 
-                <p className="mt-5 max-w-[66ch] text-[0.95rem] leading-relaxed text-slate-100/90 sm:text-[1.05rem]">
+                {/* Subhead */}
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/92 sm:text-lg">
                   Generate platform-native media kits from verified sources, with proofs,
                   scheduling, and performance telemetry.
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-2.5">
-                  {["Provenance", "Controls", "Audit trail", "Measurable reach"].map((chip) => (
+                {/* Trust strip (chips) */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {["Provenance", "Controls", "Audit trail", "Measurable reach"].map((t) => (
                     <span
-                      key={chip}
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-slate-100/85"
+                      key={t}
+                      className="hero-chip rounded-full px-3 py-1 text-xs text-white/88"
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-cyan/80" aria-hidden />
-                      {chip}
+                      {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+                {/* CTAs */}
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <Link
                     href="/studio"
-                    className="inline-flex h-12 w-full items-center justify-center rounded-button border border-cyan/50 bg-cyan/10 px-6 text-[0.7rem] uppercase tracking-[0.22em] text-cyan shadow-[0_18px_50px_rgba(0,0,0,0.45)] transition-shadow hover:shadow-[0_0_0_1px_rgba(89,240,255,0.18),0_0_30px_rgba(89,240,255,0.16),0_18px_50px_rgba(0,0,0,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 sm:w-auto"
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 bg-white/10 px-6 text-sm font-medium text-white transition hover:bg-white/14"
                   >
                     Open Operator Console
                   </Link>
                   <Link
                     href="/proof"
-                    className="inline-flex h-12 w-full items-center justify-center rounded-button border border-white/10 bg-black/20 px-6 text-[0.7rem] uppercase tracking-[0.22em] text-slate-200/80 transition hover:bg-white/5 hover:text-cyan focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/40 sm:w-auto"
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-transparent px-6 text-sm font-medium text-white/85 transition hover:border-white/18 hover:text-white"
                   >
                     See Proof
                   </Link>
                 </div>
               </div>
 
-              <div className="mt-10 rounded-card border border-white/10 bg-black/20 p-4 sm:p-5">
+              <div className="relative z-10 mt-10">
                 <DistroDiagram className="h-auto w-full" />
               </div>
 
-              <div className="mt-8">
+              <div className="relative z-10 mt-8">
                 <div className="flex gap-3 overflow-x-auto pb-2">
                   {[
                     {
@@ -175,14 +181,14 @@ export default function HeroIntro() {
                           Proof
                         </span>
                       </div>
-                      <p className="mt-3 text-xs text-slate-200/75">{artifact.desc}</p>
+                      <p className="mt-3 text-xs text-white/85">{artifact.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
-            </section>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
