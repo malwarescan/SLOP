@@ -8,7 +8,7 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
       viewBox="0 0 900 520"
       className={className}
       role="img"
-      aria-label="Depth distribution diagram with a spark at the SLOP distro layer."
+      aria-label="System map showing sources becoming channel kits and published exports, with a spark at the distribution engine."
       preserveAspectRatio="xMidYMid meet"
     >
       <defs>
@@ -56,14 +56,14 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
       {/* Layers (top -> bottom) */}
       <g>
         <polygon
-          points="190,90 710,90 690,150 210,150"
+          points="190,60 710,60 690,120 210,120"
           fill="url(#layerFill)"
           stroke="url(#layerStroke)"
           strokeWidth="1"
           opacity="0.9"
         />
         <polygon
-          points="230,170 670,170 650,230 250,230"
+          points="230,140 670,140 650,200 250,200"
           fill="url(#layerFill)"
           stroke="url(#layerStroke)"
           strokeWidth="1"
@@ -72,7 +72,7 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
 
         {/* Distro layer (highlighted) */}
         <polygon
-          points="270,250 630,250 610,310 290,310"
+          points="270,220 630,220 610,280 290,280"
           fill="rgba(11, 14, 17, 0.55)"
           stroke="rgba(89, 240, 255, 0.22)"
           strokeWidth="8"
@@ -80,7 +80,7 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
           filter="url(#softGlow)"
         />
         <polygon
-          points="270,250 630,250 610,310 290,310"
+          points="270,220 630,220 610,280 290,280"
           fill="rgba(18, 22, 27, 0.72)"
           stroke="url(#distroStroke)"
           strokeWidth="2"
@@ -88,14 +88,14 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
         />
 
         <polygon
-          points="220,330 680,330 660,390 240,390"
+          points="220,300 680,300 660,360 240,360"
           fill="url(#layerFill)"
           stroke="url(#layerStroke)"
           strokeWidth="1"
           opacity="0.92"
         />
         <polygon
-          points="170,410 730,410 710,470 190,470"
+          points="170,380 730,380 710,440 190,440"
           fill="url(#layerFill)"
           stroke="url(#layerStroke)"
           strokeWidth="1"
@@ -106,59 +106,90 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
       {/* Flow lines */}
       <g strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.9">
         <path
-          d="M450 110 L450 450"
+          d="M450 88 L450 492"
           stroke="rgba(255,255,255,0.08)"
           strokeWidth="8"
         />
         <path
-          d="M450 110 L450 450"
+          d="M450 88 L450 492"
           stroke="rgba(89,240,255,0.14)"
           strokeWidth="2"
         />
         <path
-          id="path-left"
-          d="M450 280 C 420 320 350 360 260 440"
+          id="path-x"
+          d="M450 250 C 410 315 340 390 270 490"
           stroke="rgba(89,240,255,0.22)"
           strokeWidth="2"
         />
         <path
-          id="path-right"
-          d="M450 280 C 480 320 550 360 640 440"
+          id="path-tt"
+          d="M450 250 C 430 320 395 395 360 490"
+          stroke="rgba(255,255,255,0.14)"
+          strokeWidth="2"
+        />
+        <path
+          id="path-yt"
+          d="M450 250 C 450 330 450 410 450 490"
+          stroke="rgba(255,255,255,0.12)"
+          strokeWidth="2"
+        />
+        <path
+          id="path-ig"
+          d="M450 250 C 470 320 505 395 540 490"
           stroke="rgba(41,255,127,0.18)"
           strokeWidth="2"
         />
         <path
-          id="path-center"
-          d="M450 280 L450 472"
-          stroke="rgba(255,255,255,0.12)"
+          id="path-nl"
+          d="M450 250 C 490 315 560 390 630 490"
+          stroke="rgba(89,240,255,0.18)"
           strokeWidth="2"
         />
       </g>
 
-      {/* Output nodes */}
+      {/* Pipeline spine nodes */}
       <g>
         {[
-          { cx: 260, cy: 440, color: "rgba(89,240,255,0.9)" },
-          { cx: 450, cy: 472, color: "rgba(255,255,255,0.85)" },
-          { cx: 640, cy: 440, color: "rgba(41,255,127,0.8)" }
+          { cy: 90, label: "S", accent: false },
+          { cy: 170, label: "C", accent: false },
+          { cy: 250, label: "D", accent: true },
+          { cy: 330, label: "K", accent: false },
+          { cy: 410, label: "P", accent: false }
         ].map((node) => (
-          <g key={`${node.cx}-${node.cy}`}>
+          <g key={node.cy}>
             <circle
-              cx={node.cx}
+              cx="450"
               cy={node.cy}
-              r="10"
+              r="12"
               fill="rgba(11, 14, 17, 0.72)"
               stroke="rgba(255,255,255,0.14)"
               strokeWidth="1"
             />
-            <circle cx={node.cx} cy={node.cy} r="4" fill={node.color} />
+            <circle
+              cx="450"
+              cy={node.cy}
+              r="5"
+              fill={node.accent ? "rgba(89,240,255,0.95)" : "rgba(138,153,170,0.75)"}
+              opacity={node.accent ? 1 : 0.8}
+            />
+            <text
+              x="450"
+              y={node.cy + 4}
+              fontSize="9"
+              fontWeight="700"
+              letterSpacing="2"
+              fill={node.accent ? "rgba(255,255,255,0.92)" : "rgba(231,238,245,0.78)"}
+              textAnchor="middle"
+            >
+              {node.label}
+            </text>
           </g>
         ))}
       </g>
 
       {/* Spark at distro layer */}
       <g filter="url(#softGlow)">
-        <circle cx="450" cy="280" r="7" fill="url(#sparkCore)">
+        <circle cx="450" cy="250" r="7" fill="url(#sparkCore)">
           <animate attributeName="r" values="6;10;6" dur="2.2s" repeatCount="indefinite" />
           <animate
             attributeName="opacity"
@@ -169,7 +200,7 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
         </circle>
         <circle
           cx="450"
-          cy="280"
+          cy="250"
           r="18"
           fill="none"
           stroke="rgba(89,240,255,0.55)"
@@ -181,12 +212,12 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
         </circle>
 
         {[
-          { cx: 430, cy: 272, delay: "0s" },
-          { cx: 468, cy: 270, delay: "0.3s" },
-          { cx: 444, cy: 302, delay: "0.6s" },
-          { cx: 462, cy: 298, delay: "0.9s" },
-          { cx: 428, cy: 292, delay: "1.2s" },
-          { cx: 472, cy: 286, delay: "1.45s" }
+          { cx: 430, cy: 242, delay: "0s" },
+          { cx: 468, cy: 240, delay: "0.3s" },
+          { cx: 444, cy: 272, delay: "0.6s" },
+          { cx: 462, cy: 268, delay: "0.9s" },
+          { cx: 428, cy: 262, delay: "1.2s" },
+          { cx: 472, cy: 256, delay: "1.45s" }
         ].map((spark) => (
           <circle
             key={`${spark.cx}-${spark.cy}`}
@@ -217,36 +248,215 @@ export default function DistroDiagram({ className = "" }: DistroDiagramProps) {
       {/* Traveling spark */}
       <g opacity="0.85">
         <circle r="3.5" fill="rgba(89,240,255,0.95)" filter="url(#softGlow)">
-          <animateMotion dur="2.8s" repeatCount="indefinite" keyTimes="0;1" keySplines="0.3 0 0.2 1" calcMode="spline">
-            <mpath href="#path-left" />
+          <animateMotion
+            dur="2.8s"
+            repeatCount="indefinite"
+            keyTimes="0;1"
+            keySplines="0.3 0 0.2 1"
+            calcMode="spline"
+          >
+            <mpath href="#path-x" />
           </animateMotion>
         </circle>
         <circle r="3.2" fill="rgba(41,255,127,0.9)" filter="url(#softGlow)" opacity="0.9">
-          <animateMotion dur="3.2s" repeatCount="indefinite" begin="0.6s" keyTimes="0;1" keySplines="0.3 0 0.2 1" calcMode="spline">
-            <mpath href="#path-right" />
+          <animateMotion
+            dur="3.2s"
+            repeatCount="indefinite"
+            begin="0.6s"
+            keyTimes="0;1"
+            keySplines="0.3 0 0.2 1"
+            calcMode="spline"
+          >
+            <mpath href="#path-nl" />
           </animateMotion>
         </circle>
       </g>
 
-      {/* Labels */}
-      <g fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" textAnchor="middle">
-        <text x="450" y="128" fill="rgba(138, 153, 170, 0.9)" fontSize="12" letterSpacing="3">
-          INGEST
+      {/* Stage labels */}
+      <g
+        fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+        textAnchor="middle"
+      >
+        <g>
+          <text x="450" y="86" fill="rgba(231, 238, 245, 0.92)" fontSize="12" fontWeight="700" letterSpacing="3">
+            SOURCES
+          </text>
+          <text x="450" y="104" fill="rgba(138, 153, 170, 0.9)" fontSize="9" letterSpacing="2">
+            Croutons • sites • docs • video
+          </text>
+        </g>
+
+        <g>
+          <text x="450" y="166" fill="rgba(231, 238, 245, 0.92)" fontSize="12" fontWeight="700" letterSpacing="3">
+            CANONICAL CLAIMS + ASSETS
+          </text>
+          <text x="450" y="184" fill="rgba(138, 153, 170, 0.9)" fontSize="9" letterSpacing="2">
+            Entities • facts • citations • clips
+          </text>
+        </g>
+
+        <g filter="url(#softGlow)">
+          <text x="450" y="242" fill="rgba(89, 240, 255, 0.96)" fontSize="13" fontWeight="800" letterSpacing="3">
+            DISTRIBUTION ENGINE
+          </text>
+          <text x="450" y="260" fill="rgba(231, 238, 245, 0.88)" fontSize="9" letterSpacing="2">
+            Templates • Routing • Proof • Scheduling
+          </text>
+          <text x="450" y="274" fill="rgba(138, 153, 170, 0.85)" fontSize="8" letterSpacing="3">
+            SLOP DISTRO LAYER
+          </text>
+        </g>
+
+        <g>
+          <text x="450" y="322" fill="rgba(231, 238, 245, 0.92)" fontSize="12" fontWeight="700" letterSpacing="3">
+            CHANNEL KITS
+          </text>
+          <text x="450" y="340" fill="rgba(138, 153, 170, 0.9)" fontSize="9" letterSpacing="2">
+            Shorts pack • X kit • Newsletter issue
+          </text>
+        </g>
+
+        <g>
+          <text x="450" y="402" fill="rgba(231, 238, 245, 0.92)" fontSize="12" fontWeight="700" letterSpacing="3">
+            PUBLISH + TELEMETRY
+          </text>
+          <text x="450" y="420" fill="rgba(138, 153, 170, 0.9)" fontSize="9" letterSpacing="2">
+            Exports • UTMs • dashboards • receipts
+          </text>
+        </g>
+      </g>
+
+      {/* Channel nodes */}
+      <g fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+        {[
+          { cx: 270, label: "X", color: "rgba(89,240,255,0.95)" },
+          { cx: 360, label: "TT", color: "rgba(255,255,255,0.8)" },
+          { cx: 450, label: "YT", color: "rgba(255,255,255,0.85)" },
+          { cx: 540, label: "IG", color: "rgba(41,255,127,0.85)" },
+          { cx: 630, label: "NL", color: "rgba(89,240,255,0.75)" }
+        ].map((node) => (
+          <g key={node.label}>
+            <circle
+              cx={node.cx}
+              cy="490"
+              r="14"
+              fill="rgba(11, 14, 17, 0.78)"
+              stroke="rgba(255,255,255,0.14)"
+              strokeWidth="1"
+            />
+            <circle cx={node.cx} cy="490" r="5" fill={node.color} />
+            <text
+              x={node.cx}
+              y="494"
+              fontSize="10"
+              fontWeight="800"
+              letterSpacing="2"
+              fill="rgba(231, 238, 245, 0.9)"
+              textAnchor="middle"
+            >
+              {node.label}
+            </text>
+          </g>
+        ))}
+
+        <text
+          x="450"
+          y="512"
+          textAnchor="middle"
+          fontSize="9"
+          letterSpacing="2"
+          fill="rgba(138, 153, 170, 0.85)"
+        >
+          + partner sites • newsletters • ad inventory
         </text>
-        <text x="450" y="208" fill="rgba(138, 153, 170, 0.9)" fontSize="12" letterSpacing="3">
-          NORMALIZE
-        </text>
-        <text x="450" y="290" fill="rgba(89, 240, 255, 0.92)" fontSize="12" letterSpacing="3">
-          SLOP DISTRO LAYER
-        </text>
-        <text x="450" y="368" fill="rgba(138, 153, 170, 0.9)" fontSize="12" letterSpacing="3">
-          PACK
-        </text>
-        <text x="450" y="448" fill="rgba(138, 153, 170, 0.9)" fontSize="12" letterSpacing="3">
-          EXPORT
-        </text>
+      </g>
+
+      {/* Proof packet callout */}
+      <g fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+        <path
+          d="M470 250 C 560 232 625 214 665 206"
+          stroke="rgba(89,240,255,0.28)"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <circle cx="665" cy="206" r="3" fill="rgba(89,240,255,0.85)" />
+
+        <g transform="translate(675 150)">
+          <rect
+            x="0"
+            y="0"
+            width="200"
+            height="150"
+            rx="16"
+            fill="rgba(11, 14, 17, 0.86)"
+            stroke="rgba(89,240,255,0.28)"
+            strokeWidth="1"
+          />
+          <rect
+            x="12"
+            y="12"
+            width="176"
+            height="126"
+            rx="12"
+            fill="rgba(18, 22, 27, 0.55)"
+            stroke="rgba(255,255,255,0.08)"
+            strokeWidth="1"
+          />
+
+          <text
+            x="24"
+            y="36"
+            fontSize="10"
+            fontWeight="800"
+            letterSpacing="3"
+            fill="rgba(89,240,255,0.92)"
+          >
+            PROOF PACKET
+          </text>
+          {[
+            ["Sources", "14"],
+            ["Claims", "22"],
+            ["Approved", "22"],
+            ["Reused", "78%"],
+            ["New", "22%"],
+            ["Exported", "5 ch"]
+          ].map(([label, value], index) => (
+            <g key={label}>
+              <text
+                x="24"
+                y={60 + index * 14}
+                fontSize="9"
+                letterSpacing="2"
+                fill="rgba(138,153,170,0.9)"
+              >
+                {label}
+              </text>
+              <text
+                x="176"
+                y={60 + index * 14}
+                fontSize="9"
+                fontWeight="700"
+                letterSpacing="2"
+                fill="rgba(231,238,245,0.9)"
+                textAnchor="end"
+              >
+                {value}
+              </text>
+            </g>
+          ))}
+
+          <text
+            x="24"
+            y="132"
+            fontSize="8"
+            letterSpacing="3"
+            fill="rgba(138,153,170,0.8)"
+          >
+            RECEIPTS ATTACHED
+          </text>
+        </g>
       </g>
     </svg>
   );
 }
-
