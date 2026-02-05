@@ -8,9 +8,18 @@ export default function HeroIntro() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [ended, setEnded] = useState(false);
   const [videoHidden, setVideoHidden] = useState(false);
-  const [showHero, setShowHero] = useState(false);
-  const [heroVisible, setHeroVisible] = useState(false);
+  const [systemVisible, setSystemVisible] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
+
+  const skipIntro = () => {
+    setEnded(true);
+    setSoundOn(false);
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = video.duration || 0;
+    }
+  };
 
   const toggleSound = async () => {
     const video = videoRef.current;
@@ -44,8 +53,7 @@ export default function HeroIntro() {
 
   useEffect(() => {
     if (!ended) return;
-    setShowHero(true);
-    const frame = window.requestAnimationFrame(() => setHeroVisible(true));
+    const frame = window.requestAnimationFrame(() => setSystemVisible(true));
     return () => window.cancelAnimationFrame(frame);
   }, [ended]);
 
@@ -68,6 +76,7 @@ export default function HeroIntro() {
               setEnded(true);
               setSoundOn(false);
             }}
+            onError={() => skipIntro()}
           >
             <source
               src="/sloptech-540p.mp4"
@@ -79,92 +88,123 @@ export default function HeroIntro() {
 
           {!ended && (
             <div className="absolute bottom-4 right-4 z-10 sm:bottom-6 sm:right-6">
-              <button
-                type="button"
-                onClick={() => void toggleSound()}
-                className="rounded-full border border-white/15 bg-obsidian/80 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-steel transition hover:text-cyan"
-                aria-pressed={soundOn}
-                aria-label={soundOn ? "Mute intro video" : "Unmute intro video"}
-              >
-                {soundOn ? "Sound On" : "Sound Off"}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => skipIntro()}
+                  className="rounded-full border border-white/10 bg-obsidian/80 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-white/85 transition hover:border-white/18 hover:text-white"
+                >
+                  Skip
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void toggleSound()}
+                  className="rounded-full border border-white/15 bg-obsidian/80 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-steel transition hover:text-cyan"
+                  aria-pressed={soundOn}
+                  aria-label={soundOn ? "Mute intro video" : "Unmute intro video"}
+                >
+                  {soundOn ? "Sound On" : "Sound Off"}
+                </button>
+              </div>
             </div>
           )}
         </>
       )}
 
-      {showHero && (
-        <div
-          className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-            heroVisible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-          }`}
-          aria-hidden={!heroVisible}
-        >
-          <section className="relative h-full w-full overflow-hidden">
-            <div className="absolute inset-0 z-0 pointer-events-none bg-obsidian" aria-hidden />
-            <div className="absolute inset-0 z-0 pointer-events-none bg-oracle-grid opacity-80" aria-hidden />
-            <div className="absolute inset-0 z-0 pointer-events-none hero-checkerboard opacity-25" aria-hidden />
-            <div
-              className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-obsidian/15 via-obsidian/55 to-obsidian"
-              aria-hidden
-            />
+      <div className="absolute inset-0">
+        <section className="relative h-full w-full overflow-hidden">
+          <div
+            className={`absolute inset-0 z-0 pointer-events-none bg-obsidian transition-opacity duration-700 ease-out ${
+              ended ? "opacity-100" : "opacity-0"
+            }`}
+            aria-hidden
+          />
+          <div
+            className={`absolute inset-0 z-0 pointer-events-none bg-oracle-grid opacity-80 transition-opacity duration-700 ease-out ${
+              ended ? "opacity-100" : "opacity-0"
+            }`}
+            aria-hidden
+          />
+          <div
+            className={`absolute inset-0 z-0 pointer-events-none hero-checkerboard opacity-25 transition-opacity duration-700 ease-out ${
+              ended ? "opacity-100" : "opacity-0"
+            }`}
+            aria-hidden
+          />
+          <div
+            className={`absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-obsidian/15 via-obsidian/55 to-obsidian transition-opacity duration-700 ease-out ${
+              ended ? "opacity-100" : "opacity-0"
+            }`}
+            aria-hidden
+          />
 
-            <div className="relative z-10 mx-auto grid max-w-[1120px] grid-cols-12 px-6 pb-10 pt-16">
-              <div className="hero-unit col-span-12 px-6 py-10 sm:px-10 sm:py-12">
-                <div className="relative z-10">
-                  {/* Eyebrow */}
-                  <div className="text-xs uppercase tracking-[0.18em] text-white/85">
-                    Distribution with proof
-                    <div className="hero-eyebrow-rule" />
-                  </div>
-
-                  {/* Headline */}
-                  <h1 className="hero-headline-tight mt-4 text-4xl font-semibold leading-[0.98] text-white sm:text-5xl lg:text-6xl">
-                    TURN STRUCTURED TRUTH INTO
-                    <br className="hidden sm:block" />
-                    DISTRIBUTED MEDIA.
-                  </h1>
-
-                  {/* Subhead */}
-                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/92 sm:text-lg">
-                    Generate platform-native media kits from verified sources, with proofs,
-                    scheduling, and performance telemetry.
-                  </p>
-
-                  {/* Trust strip (chips) */}
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {["Provenance", "Controls", "Audit trail", "Measurable reach"].map((t) => (
-                      <span
-                        key={t}
-                        className="hero-chip rounded-full px-3 py-1 text-xs text-white/88"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* CTAs */}
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
-                    <Link
-                      href="/operator"
-                      className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 bg-white/10 px-6 text-sm font-medium text-white transition hover:bg-white/14"
-                    >
-                      Open Operator Console
-                    </Link>
-                    <Link
-                      href="/proof"
-                      className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-transparent px-6 text-sm font-medium text-white/85 transition hover:border-white/18 hover:text-white"
-                    >
-                      See Proof
-                    </Link>
-                  </div>
+          <div className="relative z-10 mx-auto grid max-w-[1120px] grid-cols-12 px-6 pb-10 pt-16">
+            <div className="hero-unit col-span-12 px-6 py-10 sm:px-10 sm:py-12">
+              <div className="relative z-10">
+                {/* Eyebrow */}
+                <div className="text-xs uppercase tracking-[0.18em] text-white/85">
+                  Distribution with proof
+                  <div className="hero-eyebrow-rule" />
                 </div>
 
-                <div className="relative z-10 mt-10">
+                {/* Headline */}
+                <h1 className="hero-headline-tight mt-4 text-4xl font-semibold leading-[0.98] text-white sm:text-5xl lg:text-6xl">
+                  TURN STRUCTURED TRUTH INTO
+                  <br className="hidden sm:block" />
+                  DISTRIBUTED MEDIA.
+                </h1>
+
+                {/* Subhead */}
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/92 sm:text-lg">
+                  Generate platform-native media kits from verified sources, with proofs,
+                  scheduling, and performance telemetry.
+                </p>
+
+                {/* Trust strip (chips) */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {["Provenance", "Controls", "Audit trail", "Measurable reach"].map((t) => (
+                    <span
+                      key={t}
+                      className="hero-chip rounded-full px-3 py-1 text-xs text-white/88"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
+                  <Link
+                    href="/operator"
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 bg-white/10 px-6 text-sm font-medium text-white transition hover:bg-white/14"
+                  >
+                    Open Operator Console
+                  </Link>
+                  <Link
+                    href="/proof"
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-transparent px-6 text-sm font-medium text-white/85 transition hover:border-white/18 hover:text-white"
+                  >
+                    See Proof
+                  </Link>
+                </div>
+              </div>
+
+              {ended && (
+                <div
+                  className={`relative z-10 mt-10 transition-opacity duration-700 ease-out ${
+                    systemVisible ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   <DistroDiagram className="h-auto w-full" />
                 </div>
+              )}
 
-                <div className="relative z-10 mt-8">
+              {ended && (
+                <div
+                  className={`relative z-10 mt-8 transition-opacity duration-700 ease-out ${
+                    systemVisible ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   <div className="flex gap-3 overflow-x-auto pb-2">
                     {[
                       {
@@ -196,11 +236,11 @@ export default function HeroIntro() {
                     ))}
                   </div>
                 </div>
+              )}
               </div>
             </div>
           </section>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
