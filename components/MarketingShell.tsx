@@ -26,10 +26,10 @@ export default function MarketingShell({
         <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
           <Link href="/" className="flex items-center">
             <Image
-              src="/slop-logo.png"
+              src="/SLOP_logo.png"
               alt="SLOP"
-              width={160}
-              height={64}
+              width={767}
+              height={323}
               priority
               className="h-8 w-auto select-none sm:h-10"
             />
